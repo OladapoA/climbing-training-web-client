@@ -1,0 +1,23 @@
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background: grey;
+    color: white;
+  }
+  
+  .nav-links {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: white;
+  }
