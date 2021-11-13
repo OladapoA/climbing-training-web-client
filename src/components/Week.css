@@ -1,0 +1,75 @@
+/* .day {
+    padding: 2%;
+    margin: 1%;
+    width: 1/8;
+    display: inline-block;
+    background-color: aqua;
+}
+
+.title {
+    padding: 2%;
+    margin: 1%;
+    width: 1/8;
+    display: inline-block;
+} */
+
+/* .day {
+    margin: 3%;
+    display: inline-block;
+    background-color: aqua;
+}
+
+.title {
+    margin: 3%;
+    display: inline-block;
+} */
+
+.day {
+    width: 10%;
+    height: 30px;
+    display: inline-block;
+    /* background-color: lightgray; */
+    margin: 1%;
+}
+
+.title {
+    width: 10%;
+    height: 30px;
+    display: inline-block;
+    margin: 1%;
+}
+
+.future {
+    background-color: lightgray;
+}
+
+.today {
+    background-color: gray;
+    font-weight: bold;
+}
+
+.pastIncomplete {
+    background-color: darkred;
+    color: white;
+}
+
+.pastStarted {
+    background-color: darkorange;
+    color: white;
+}
+
+.pastComplete {
+    background-color: darkgreen;
+    color: white;
+}
+
+.todayStarted {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.todayFinished {
+    background-color: lightgreen;
+    color: white;
+    font-weight: bold;
+}

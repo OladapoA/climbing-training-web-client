@@ -6,6 +6,7 @@ import About from './views/About'
 import Overview from './views/Overview';
 import Exercices from './views/Exercises'
 import TrainingSeasons from './views/TrainingSeasons'
+import SingleSeason from './views/SingleSeason'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/overview" component={Overview} />
           <Route path="/exercises" component={Exercices} />
-          <Route path="/training-seasons" component={TrainingSeasons} />
+          <Route path="/training-seasons" exact component={TrainingSeasons} />
+          <Route path="/training-seasons/:id" component={SingleSeason} />
         </Switch>
       </div>
     </Router>
