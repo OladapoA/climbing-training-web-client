@@ -1,19 +1,10 @@
-import React from 'react';
-import './Week.css';
-
-// function Week(props) {
-
-//   return (
-//     <div className="modal">
-//         test
-//     </div>
-//   );
-// }
-
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Status from './Status';
+import './Week.css';
+import { Link } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -28,10 +19,23 @@ const style = {
 };
 
 function DaySessionModal(props) {
-  const { handleClose, open } = props;
-  // const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
+  const { handleClose, open, daySessionId } = props;
+  
+  useEffect(() => {
+    fetchItems();
+  }, [daySessionId]);
+
+  const [daySession, setDaySession] = useState([]);
+
+  const fetchItems = async () => {
+    // console.log()
+    if (daySessionId !== undefined) {
+      const data = await fetch(`/api/v1/day-sessions/${daySessionId}`);
+      const daySession = await data.json();
+      console.log(daySession);
+      setDaySession(daySession);
+    }
+  }
 
   return (
     <div>
@@ -43,11 +47,20 @@ function DaySessionModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {daySession.date !== undefined && daySession.date.split(" ")[0]} Sessions 
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          {daySession.sessions !== undefined && 
+            daySession.sessions.map(session =>
+              <div key={session[0]}>
+                <Link to={`/sessions/${session[0]}`}>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    {session[1]}
+                  </Typography>
+                </Link>
+                <Status status={session[2]} />
+              </div>
+            )
+          }
         </Box>
       </Modal>
     </div>

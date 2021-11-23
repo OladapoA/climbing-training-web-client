@@ -6,9 +6,11 @@ import Button from '@mui/material/Button';
 function Season(props) {
     const [open, setOpen] = useState(false);
     const [daySessionId, setdaySessionId] = useState();
-    const handleOpen = () => setOpen(true);
+    const handleOpen = (id) => {
+        setOpen(true);
+        setdaySessionId(id);
+    }
     const handleClose = () => setOpen(false);
-    const handleDayIdChange = (id) => setdaySessionId(id);
     const daySessions = props.season.daySessions
     var weeks = [];
 
@@ -24,7 +26,6 @@ function Season(props) {
                     weekNumber={weekNumber} 
                     weekDaySessions={weekDaySessions}
                     handleOpen={handleOpen}
-                    handleDayIdChange={handleDayIdChange}
                 />
             );
         }
@@ -38,6 +39,7 @@ function Season(props) {
                 handleOpen={handleOpen}
                 handleClose={handleClose}
                 open={open}
+                daySessionId={daySessionId}
             />
             {weeks}
         </div>

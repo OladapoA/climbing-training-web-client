@@ -2,7 +2,7 @@ import React from 'react';
 import './Week.css';
 
 function Week(props) {
-  const { weekNumber, weekDaySessions, handleOpen, handleDayIdChange } = props;
+  const { weekNumber, weekDaySessions, handleOpen } = props;
   const today = new Date();
   today.setHours(0)
   today.setMinutes(0)
@@ -39,13 +39,13 @@ function Week(props) {
         <div className="day today">S</div>
         <div className="day future">S</div> */}
         <div className="title"><h2>Week {weekNumber}</h2></div>
-        <div onClick={() => handleDayIdChange(weekDaySessions[0][0])} className={`day ${dayColours[0]}`}>M</div>
-        <div onClick={handleOpen} className={`day ${dayColours[1]}`}>T</div>
-        <div onClick={handleOpen} className={`day ${dayColours[2]}`}>W</div>
-        <div onClick={handleOpen} className={`day ${dayColours[3]}`}>T</div>
-        <div onClick={handleOpen} className={`day ${dayColours[4]}`}>F</div>
-        <div onClick={handleOpen} className={`day ${dayColours[5]}`}>S</div>
-        <div onClick={handleOpen} className={`day ${dayColours[6]}`}>S</div>
+        <div onClick={() => handleOpen(weekDaySessions[0][0])} className={`day ${dayColours[0]}`}>M</div>
+        <div onClick={() => handleOpen(weekDaySessions[1][0])} className={`day ${dayColours[1]}`}>T</div>
+        <div onClick={() => handleOpen(weekDaySessions[2][0])} className={`day ${dayColours[2]}`}>W</div>
+        <div onClick={() => handleOpen(weekDaySessions[3][0])} className={`day ${dayColours[3]}`}>T</div>
+        <div onClick={() => handleOpen(weekDaySessions[4][0])} className={`day ${dayColours[4]}`}>F</div>
+        <div onClick={() => handleOpen(weekDaySessions[5][0])} className={`day ${dayColours[5]}`}>S</div>
+        <div onClick={() => handleOpen(weekDaySessions[6][0])} className={`day ${dayColours[6]}`}>S</div>
     </div>
   );
 }
