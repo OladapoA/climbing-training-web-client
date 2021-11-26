@@ -11,7 +11,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 300,
+    height: 700,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -41,7 +42,7 @@ function ExerciseSelectionModal(props) {
         return exercises.map(exercise => (
             <div key={exercise.id} className="App">
                 <hr/>
-                <h2>{exercise.name}</h2>
+                <h2 className="test">{exercise.name}</h2>
                 {exercise.beginner && <span> Beginner </span>}
                 {exercise.intermediate && <span> intermediate </span>}
                 {exercise.advanced && <span> advanced </span>}
@@ -76,17 +77,24 @@ function ExerciseSelectionModal(props) {
     }
 
     return (
-        <div className="overflow">
+        <div>
             <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style} className="overflow">
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Box sx={style}>
+                    {/* <Typography id="modal-modal-title" variant="h6" component="h2">
                         Select Exercise 
-                    </Typography>
+                    </Typography> */}
+                    {/* <div className="test">{getExercises()}</div> */}
+                    <div className="fixed"><h1>TESTINGG</h1></div>
+                    {/* <div className="absolute">TESTINGG</div>
+                    <div className="overflow">
+                        what happens to this text
+                        {getExercises()}
+                    </div> */}
                     {getExercises()}
                 </Box>
             </Modal>
