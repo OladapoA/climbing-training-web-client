@@ -1,5 +1,8 @@
 .overflow {
-    overflow: 'scroll';
+    height: 500px;
+    overflow: scroll;
+    display: inline-block;
+    color: blue;
 }
 
 .fixed {
