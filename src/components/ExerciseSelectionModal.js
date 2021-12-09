@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
 import Status from './Status';
 import './ExerciseSelectionModal.css';
 import { Link } from 'react-router-dom';
@@ -39,13 +40,14 @@ function ExerciseSelectionModal(props) {
     const [advanced, setAdvanced] = useState(false);
 
     const [type, setType] = useState("");
+    const [subType, setSubType] = useState("");
 
-    const filter = (beginner, intermediate, advanced, type) => {
+    const filter = (beginner, intermediate, advanced, type, subType) => {
         console.log("filtering now")
-        setFilterExercises(exercises)
+        var filteredExercises = exercises;
 
         if (beginner || intermediate || advanced) {
-            setFilterExercises(filterExercises.filter(exercise => {
+            filteredExercises = filteredExercises.filter(exercise => {
                 if (beginner) {
                     return exercise.beginner;
                 } else if (intermediate) {
@@ -55,12 +57,18 @@ function ExerciseSelectionModal(props) {
                 } else {
                     return false;
                 }
-            }))
+            });
         }
 
         if (type !== "") {
-            setFilterExercises(filterExercises.filter(exercise => exercise.type === type));
+            filteredExercises = filteredExercises.filter(exercise => exercise.type === type);
         }
+
+        if (subType !== "") {
+            filteredExercises = filteredExercises.filter(exercise => exercise.subtype === subType);
+        }
+
+        setFilterExercises(filteredExercises);
     }
 
     const handleLevel = (action) => {
@@ -70,15 +78,15 @@ function ExerciseSelectionModal(props) {
         switch(action) {
             case "beginner":
                 setBeginner(!beginner);
-                filter(!beginner, intermediate, advanced, type);
+                filter(!beginner, intermediate, advanced, type, subType);
                 break;
             case "intermediate":
                 setIntermediate(!intermediate);
-                filter(beginner, !intermediate, advanced, type);
+                filter(beginner, !intermediate, advanced, type, subType);
                 break;
             case "advanced":
                 setAdvanced(!advanced);
-                filter(beginner, intermediate, !advanced, type);
+                filter(beginner, intermediate, !advanced, type, subType);
                 break;
             default:
                 break;
@@ -100,7 +108,14 @@ function ExerciseSelectionModal(props) {
         const type = event.target.value;
         console.log(type);
         setType(type);
-        filter(beginner, intermediate, advanced, type);
+        filter(beginner, intermediate, advanced, type, subType);
+    }
+
+    const handleSubTypeChange = (event) => {
+        const subType = event.target.value;
+        console.log(subType);
+        setSubType(subType);
+        filter(beginner, intermediate, advanced, type, subType);
     }
 
     const getExercises = () => {
@@ -121,6 +136,7 @@ function ExerciseSelectionModal(props) {
 
                 <h4>Purpose:</h4>
                 <p>{exercise.purpose}</p>
+                <Button onClick={handleClose}>Select</Button>
                 <hr/>
             </div>
         ))
@@ -135,10 +151,6 @@ function ExerciseSelectionModal(props) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Select Exercise 
-                    </Typography> */}
-                    {/* <div className="test">{getExercises()}</div> */}
                     <div>
                         <input type="checkbox" id="beginner" name="beginner" checked={beginner} onChange={() => handleLevel("beginner")} />
                         <label>beginner</label>
@@ -166,31 +178,42 @@ function ExerciseSelectionModal(props) {
                             <MenuItem value={"Fitness"}>Fitness</MenuItem>
                         </Select>
                     </FormControl>
-                    <div><h1>TESTINGG</h1></div>
-                    <div className="absolute">TESTINGG</div>
-                    <div className="overflow">
-                        what happens to this text
-                        {/* {getExercises()} */}
-                        {filterExercises.map(exercise => (
-                            <div key={exercise.id}>
-                                <hr/>
-                                <h2>{exercise.name}</h2>
-                                {exercise.beginner && <span> Beginner </span>}
-                                {exercise.intermediate && <span> intermediate </span>}
-                                {exercise.advanced && <span> advanced </span>}
-                                <h4>Duration: {exercise.time}</h4>
-                                <h4>{exercise.description}</h4>
-                                <p>type: {exercise.type} || Subtype: {exercise.subtype}</p>
-                                <p>Reps and sets info: {exercise.repsSetsInfo}</p>
-                                <p>Sets: {exercise.sets} || Reps: {exercise.reps}</p>
-
-                                <h4>Purpose:</h4>
-                                <p>{exercise.purpose}</p>
-                                <hr/>
-                            </div>))
-                        }
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Sub-Type</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={subType}
+                            label="Sub-Type"
+                            onChange={handleSubTypeChange}
+                        >
+                            <MenuItem value={""}>Select</MenuItem>
+                            <MenuItem value={"Full body"}>Full body</MenuItem>
+                            <MenuItem value={"Hands, fingers, wrists"}>Hands, fingers, wrists</MenuItem>
+                            <MenuItem value={"Shoulders"}>Shoulders</MenuItem>
+                            <MenuItem value={"wrists"}>wrists</MenuItem>
+                            <MenuItem value={"Fingers"}>Fingers</MenuItem>
+                            <MenuItem value={"Hangboard"}>Hangboard</MenuItem>
+                            <MenuItem value={"Pull Up Bar or Rings"}>Pull Up Bar or Rings</MenuItem>
+                            <MenuItem value={"Climbing Drills"}>Climbing Drills</MenuItem>
+                            <MenuItem value={"Campus Board"}>Campus Board</MenuItem>
+                            <MenuItem value={"Power Endurance Drills"}>Power Endurance Drills</MenuItem>
+                            <MenuItem value={"Technique Drills"}>Technique Drills</MenuItem>
+                            <MenuItem value={"Core"}>Core</MenuItem>
+                            <MenuItem value={"Fitness"}>Fitness</MenuItem>
+                        </Select>
+                    </FormControl>
+                    
+                    {/* <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Select Exercise 
+                    </Typography> */}
+                    <div><h2 id="select-header">Select Exercise</h2></div>
+                    <div className="absolute">
+                        <Button onClick={handleClose}>Cancel</Button>
                     </div>
-                    {/* {getExercises()} */}
+                    <div className="overflow">
+                        {getExercises()}
+                    </div>
                 </Box>
             </Modal>
         </div>
