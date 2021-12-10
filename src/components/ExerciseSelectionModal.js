@@ -136,7 +136,7 @@ function ExerciseSelectionModal(props) {
 
                 <h4>Purpose:</h4>
                 <p>{exercise.purpose}</p>
-                <Button onClick={handleClose}>Select</Button>
+                <Button value={exercise.id} onClick={handleSelect}>Select</Button>
                 <hr/>
             </div>
         ))

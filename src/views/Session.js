@@ -20,8 +20,19 @@ function Session({ match }) {
     }
     const handleClose = () => setVisible(false)
     const handleSelect = (action) => {
-        console.log(action)
-        setVisible(false);
+        console.log(action.target.value)
+        
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            // body: JSON.stringify({ title: 'React PUT Request Example' })
+        };
+        fetch(`/api/v1/session-exercises/${sessionExerciseId}/exercise/${action.target.value}`, requestOptions)
+            .then(response => response.json())
+            .then(data => console.log(data));
+        
+        handleClose(false);
+        window.location.reload(false);
     };
 
     const fetchItems = async () => {

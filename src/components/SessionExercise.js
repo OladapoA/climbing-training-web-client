@@ -12,6 +12,7 @@ function SessionExercise(props) {
 
     return (
         <div className="App">
+            <hr />
             <h2>{sessionExercise.name}</h2>
             { sessionExercise.exercise !== null &&
                 <Button color={visible ? "error" : "success"} onClick={handleClick}>{ visible ? "Hide" : "Show" } exercise</Button>
@@ -24,6 +25,7 @@ function SessionExercise(props) {
             }
             <h4>Duration: {sessionExercise.time}</h4>
             <h4>Status: <Status status={sessionExercise.status} /></h4>
+            <hr />
         </div>
     );
 }
