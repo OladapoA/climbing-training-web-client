@@ -6,10 +6,12 @@ function Status(props) {
     const getStatus = status => {
         if (status === null) {
             return "Not Started"
-        } else if (status === "false") {
+        } else if (status === false || status === "false") {
             return "In Progress"
-        } else if (status === "true") {
+        } else if (status === true || status === "true") {
             return "Completed"
+        } else {
+            return "Unknown"
         }
     };
 

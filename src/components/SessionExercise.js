@@ -7,6 +7,7 @@ function SessionExercise(props) {
     const { sessionExercise, handleOpen,  } = props
 
     const [visible, setVisible] = useState(false);
+    const [status, setStatus] = useState(sessionExercise.status);
 
     const handleClick = () => setVisible(!visible);
 
@@ -18,20 +19,17 @@ function SessionExercise(props) {
         };
         fetch(`/api/v1/session-exercises/${sessionExercise.id}/status/?status=${action}`, requestOptions)
             .then(response => response.json())
-            .then(data => console.log(data));
-
-        // window.location.reload(false);
+            .then(data => setStatus(data.status));
     };
 
     const ActionButton = () => {
-        const status = sessionExercise.status;
         var buttonText = "";
         if (status === null) {
             buttonText = "Start";
         } else if (status === false) {
             buttonText = "Finish";
         }
-        return <Button>{buttonText}</Button>
+        return <Button onClick={() => handleAction(buttonText)}>{buttonText}</Button>
     }
 
     return (
@@ -48,9 +46,8 @@ function SessionExercise(props) {
                 <Button onClick={() => handleOpen(sessionExercise.id)}>Select Exercise</Button>
             }
             <h4>Duration: {sessionExercise.time}</h4>
-            <h4>Status: <Status status={sessionExercise.status} /></h4>
+            <h4>Status: <Status status={status} /></h4>
             { sessionExercise.exercise !== null &&
-                // <Button>{sessionExercise.status === null ? "Start" : "Finish" }</Button>
                 <ActionButton />
             }
             <hr />
